@@ -28,10 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         textColors = findViewById(R.id.colors);
-        colors = (String)textColors.getText();
+        colors = textColors.getText().toString();
 
         textHoles = findViewById(R.id.holes);
-        holes = (String)textHoles.getText();
+        holes = textHoles.getText().toString();
 
         buttonRepeat = findViewById(R.id.buttonRepeat);
         repeat = buttonRepeat.isChecked();
