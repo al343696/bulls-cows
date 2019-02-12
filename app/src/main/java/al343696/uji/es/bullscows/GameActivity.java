@@ -1,7 +1,9 @@
 package al343696.uji.es.bullscows;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +18,7 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity {
 
     //Context
-    Context context;
+    //Context context;
 
     //Intent
     String colors, holes;
@@ -42,8 +44,8 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        context = getApplicationContext();
-
+        // TODO: Necesario?
+        // context = getApplicationContext();
 
         Intent intent = getIntent();
         colors = intent.getStringExtra("colors");
@@ -97,9 +99,26 @@ public class GameActivity extends AppCompatActivity {
             //toast
 
             text = "¡Error de longitud!";
-            toast = Toast.makeText(context,text,duration);
+            toast = Toast.makeText(this,text,duration);
 
             toast.show();
+        }
+
+        else if (respuestaJugador.equals(codigo)){
+            Log.d("ok","acierto");
+
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setTitle("Hola");
+            alertDialog.setMessage("Khe onda!");
+            alertDialog.setPositiveButton("Gonorrea!", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Log.d("esto","marcha");
+                }
+            });
+            alertDialog.create().show();
+
+
         }
     }
 
