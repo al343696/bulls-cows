@@ -28,6 +28,7 @@ public class GameActivity extends AppCompatActivity {
     int colorsInt, holesInt;
     String codigo;
     Random random = new Random();
+    boolean esNumero;
 
     //DatosJugador
     TextView input = null;
@@ -92,19 +93,26 @@ public class GameActivity extends AppCompatActivity {
         input = findViewById(R.id.numero);
         respuestaJugador = input.getText().toString();
 
+        try{
+            Integer.parseInt(respuestaJugador);
 
-        if (respuestaJugador.trim().length() != holesInt){
-            Log.d("longError","¡Error de longitud!");
+            if(respuestaJugador.trim().length() != holesInt){
+                Log.d("longError","¡Error de longitud!");
 
-            //toast
-
-            text = "¡Error de longitud!";
+                //generamos toast de error de longitudes
+                text = "Lengths not matching!";
+                toast = Toast.makeText(this,text,duration);
+                toast.show();
+            }
+        }catch (NumberFormatException exception)
+        {
+            //generamos toast de error numerico
+            text = "NaN";
             toast = Toast.makeText(this,text,duration);
-
             toast.show();
         }
 
-        else if (respuestaJugador.equals(codigo)){
+        if (respuestaJugador.equals(codigo)){
             Log.d("ok","acierto");
 
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
