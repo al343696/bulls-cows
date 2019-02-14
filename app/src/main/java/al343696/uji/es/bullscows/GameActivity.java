@@ -18,22 +18,20 @@ import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
 
-    //Context
-    //Context context;
-
-    //Intent
+    //Intent data
     String colors, holes;
     boolean repeat;
 
-    //GenerarCodigo
+    //Generate code
     int colorsInt, holesInt;
     String codigo;
     Random random = new Random();
     ArrayList digitList = new ArrayList();
 
-    //DatosJugador
+    //Player info
     TextView input = null;
     String respuestaJugador = "";
+    int attempts = 0;
 
     //Toast
     Toast toast;
@@ -46,24 +44,19 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        // TODO: Necesario?
-        // context = getApplicationContext();
-
         Intent intent = getIntent();
         colors = intent.getStringExtra("colors");
         holes = intent.getStringExtra("holes");
         repeat = intent.getBooleanExtra("repeat", false);
 
-
-
         Log.d("colors", colors);
         Log.d("holes", holes);
         Log.v("repeat", ""+repeat);
 
-    /*TODO:
+        /*
         colors = digitos diferentes, colors = 9, digitos del 0 al 9.
         holes = longitud del numero.
-     */
+        */
 
 
         colorsInt = Integer.parseInt(colors);
@@ -82,6 +75,11 @@ public class GameActivity extends AppCompatActivity {
 
         if(repeat)
         {
+            for(int k = 0; k < longitud; k++) {
+                numeroActual = random.nextInt(digitos + 1);
+                Log.d("numeroActual", "" + numeroActual);
+                cadenaCodigo = cadenaCodigo + numeroActual;
+            }
 
         }
         else {
@@ -132,6 +130,23 @@ public class GameActivity extends AppCompatActivity {
                 toast = Toast.makeText(this,text,duration);
                 toast.show();
             }
+            else{
+                if (respuestaJugador.equals(codigo)){
+                    Log.d("ok","acierto");
+
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                    alertDialog.setTitle("Hola");
+                    alertDialog.setMessage("Attempts: "+attempts);
+                    alertDialog.setPositiveButton("Gonorrea!", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Log.d("esto",""+attempts);
+                        }
+                    });
+                    alertDialog.create().show();
+                }
+                else attempts++;
+            }
         }catch (NumberFormatException exception)
         {
             //generamos toast de error numerico
@@ -140,22 +155,7 @@ public class GameActivity extends AppCompatActivity {
             toast.show();
         }
 
-        if (respuestaJugador.equals(codigo)){
-            Log.d("ok","acierto");
 
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-            alertDialog.setTitle("Hola");
-            alertDialog.setMessage("Khe onda!");
-            alertDialog.setPositiveButton("Gonorrea!", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Log.d("esto","marcha");
-                }
-            });
-            alertDialog.create().show();
-
-
-        }
     }
 
 
