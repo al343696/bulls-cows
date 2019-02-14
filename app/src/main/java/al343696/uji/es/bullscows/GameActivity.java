@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -28,7 +29,7 @@ public class GameActivity extends AppCompatActivity {
     int colorsInt, holesInt;
     String codigo;
     Random random = new Random();
-    boolean esNumero;
+    ArrayList digitList = new ArrayList();
 
     //DatosJugador
     TextView input = null;
@@ -76,13 +77,40 @@ public class GameActivity extends AppCompatActivity {
     private String generarCodigo(int digitos, int longitud, boolean repeat) {
 
         String cadenaCodigo = "";
-        int numeroActual;
+        int numeroActual, i = 0;
+        boolean addNumber = true;
 
-        for (int i = 0; i < longitud; i++)
+        if(repeat)
         {
-            numeroActual = random.nextInt(digitos+1);
-            Log.d("numeroActual",""+numeroActual);
-            cadenaCodigo = cadenaCodigo + numeroActual;
+
+        }
+        else {
+            while(i < longitud) {
+                numeroActual = random.nextInt(digitos + 1);
+                Log.d("numeroActual", "" + numeroActual);
+
+                if(!digitList.isEmpty()) {
+                    for (int j = 0; j < digitList.size(); j++) {
+
+                        if(digitList.get(j).equals(numeroActual))
+                        {
+                            Log.d("numero","repetido");
+                            addNumber = false;
+                            break;
+                        }
+                    }
+                }
+
+                digitList.add(numeroActual);
+
+                if(addNumber) cadenaCodigo = cadenaCodigo + numeroActual;
+                else i--;
+
+
+
+                i++;
+                addNumber = true;
+            }
         }
 
         return cadenaCodigo;
