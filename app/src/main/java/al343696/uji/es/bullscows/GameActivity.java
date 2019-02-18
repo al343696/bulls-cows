@@ -104,8 +104,6 @@ public class GameActivity extends AppCompatActivity {
                 if(addNumber) cadenaCodigo = cadenaCodigo + numeroActual;
                 else i--;
 
-
-
                 i++;
                 addNumber = true;
             }
@@ -135,9 +133,9 @@ public class GameActivity extends AppCompatActivity {
                     Log.d("ok","acierto");
 
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-                    alertDialog.setTitle("Hola");
+                    alertDialog.setTitle("CONGRATS YOU WIN");
                     alertDialog.setMessage("Attempts: "+attempts);
-                    alertDialog.setPositiveButton("Gonorrea!", new DialogInterface.OnClickListener() {
+                    alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Log.d("esto",""+attempts);
